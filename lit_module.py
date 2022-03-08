@@ -4,7 +4,7 @@ from torch import nn
 import pytorch_lightning as pl
 
 class VOCLightning(pl.LightningModule):
-    def __init__(self. model, lr=1e-3):
+    def __init__(self, model, lr=1e-3):
         super().__init__()
 
         self.save_hyperparameters("lr")
