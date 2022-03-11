@@ -1,5 +1,4 @@
 
-from random import shuffle
 from torchvision.datasets import VOCDetection
 from torch.utils.data import DataLoader
 

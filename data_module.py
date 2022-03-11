@@ -2,8 +2,10 @@
 from torchvision.datasets import VOCDetection
 from torch.utils.data import DataLoader
 from custom_data import CustomVoc
+from torchvision import transforms as T
+import pytorch_lightning as pl
 
-class VOCLightningModule(...):
+class VOCLightningModule(pl.LightningDataModule):
     def __init__(self, data_dir='.', batch_size=32, num_workers=0, transforms=None):
         super().__init__(batch_size)
         self.batch_size = batch_size
@@ -15,20 +17,22 @@ class VOCLightningModule(...):
         data_train_voc = VOCDetection(
                     root=self.data_dir, download="True", 
                     image_set="train", 
-                    year='2007'
-                    transforms=transforms)
+                    year='2007',
+                    transform=T.ToTensor())
         self.data_train = CustomVoc(data_train_voc)
         
         data_val_voc = VOCDetection(
                     root=self.data_dir, download="True", 
                     image_set="val", 
-                    year='2007')
+                    year='2007',
+                    transform=T.ToTensor())
         self.data_val = CustomVoc(data_val_voc)
         
         data_test_voc = VOCDetection(
                     root=self.data_dir, download="True", 
                     image_set="test", 
-                    year='2007')
+                    year='2007',
+                    transform=T.ToTensor())
         self.data_test = CustomVoc(data_test_voc)
 
     def train_dataloader(self):
